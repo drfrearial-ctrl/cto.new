@@ -1,7 +1,102 @@
 @import "tailwindcss";
+
+/* =========================================================================
+   Brand design tokens (Tailwind v4 @theme)
+   Source: Brand Guidelines — Website Redesign project (authoritative)
+   -----------------------------------------------------------------------
+   Palette:
+     Primary Blue #2D6CDF  -> CTAs / links / accents
+     Off White   #F9F9F7  -> page backgrounds
+     Charcoal    #1A1A1A  -> body text / headings
+     Warm Gray   #6B6B6B  -> secondary text / captions
+   Typography: Inter. 8pt spacing grid. Editorial clarity + product
+   precision. WCAG AA accessible.
+   ========================================================================= */
+@theme {
+  /* Palette */
+  --color-primary: #2d6cdf;
+  --color-primary-soft: #e8eefb;
+  --color-offwhite: #f9f9f7;
+  --color-charcoal: #1a1a1a;
+  --color-warmgray: #6b6b6b;
+
+  /* Typography */
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+
+  /* Type scale (per guidelines) */
+  --text-h1: 3rem; /* 48px */
+  --text-h1--line-height: 1.1;
+  --text-h1--font-weight: 700;
+  --text-h2: 2rem; /* 32px */
+  --text-h2--line-height: 1.2;
+  --text-h2--font-weight: 700;
+  --text-h3: 1.5rem; /* 24px */
+  --text-h3--line-height: 1.3;
+  --text-h3--font-weight: 700;
+
+  --text-body: 1rem; /* 16px */
+  --text-body--line-height: 1.6;
+  --text-body--font-weight: 400;
+
+  /* 8pt spacing grid */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-24: 6rem;
+
+  --container-page: 72rem;
+}
+
 @layer base {
-  html,
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-white text-gray-900 antialiased dark:bg-gray-950 dark:text-gray-100;
+    @apply bg-offwhite text-charcoal font-sans antialiased;
+  }
+
+  /* Headings: Inter Bold (700) */
+  h1,
+  h2,
+  h3 {
+    @apply font-sans font-bold text-charcoal;
+  }
+  h1 {
+    @apply text-h1;
+  }
+  h2 {
+    @apply text-h2;
+  }
+  h3 {
+    @apply text-h3;
+  }
+
+  /* Body: Inter Regular (400) 16px / 1.6 */
+  p {
+    @apply text-body text-charcoal;
+  }
+
+  /* Captions / labels: Medium (500) 12px uppercase 0.08em */
+  .label {
+    @apply font-sans font-medium text-xs uppercase tracking-[0.08em] text-warmgray;
+  }
+
+  /* Accessible focus ring using Primary Blue */
+  :focus-visible {
+    @apply outline-primary;
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: #fff;
   }
 }
