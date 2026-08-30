@@ -1,43 +1,56 @@
 @import "tailwindcss";
-
 /* =========================================================================
-   Brand design tokens (Tailwind v4 @theme)
-   Source: Brand Guidelines — Website Redesign project (authoritative)
-   -----------------------------------------------------------------------
-   Palette:
-     Primary Blue #2D6CDF  -> CTAs / links / accents
-     Off White   #F9F9F7  -> page backgrounds
-     Charcoal    #1A1A1A  -> body text / headings
-     Warm Gray   #6B6B6B  -> secondary text / captions
-   Typography: Inter. 8pt spacing grid. Editorial clarity + product
-   precision. WCAG AA accessible.
+   My Moms Bakery — design tokens (Tailwind v4 @theme)
+   Warm, homey, small-town, family-run. Flour-on-counter / recipe-card warmth
+   on a clean, modern layout. NOT corporate, NOT cold-minimal.
+   Palette (WCAG AA friendly on the cream/paper backgrounds):
+     Cream     #FAF6EF  -> page background
+     Paper     #FFFDF7  -> cards / raised surfaces
+     Flour     #EEE6D8  -> hairline borders / subtle fills
+     Ink       #2B2118  -> headings / body (warm near-black brown)
+     Mocha     #6E5E4E  -> secondary / captions
+     Honey     #B45309  -> primary accent / CTAs  (amber-700)
+     Honey-deep #92400E -> accent hover          (amber-800)
+     Rust      #C05621  -> warm secondary accent (orange-700)
+     Open      #047857  -> "open now" green      (emerald-700)
+     Close     #6B7280  -> "closed" gray         (gray-500)
+   Typography: Fraunces (display serif) for headings, Inter for body.
+   8pt spacing grid. Editorial warmth + precision.
    ========================================================================= */
 @theme {
   /* Palette */
-  --color-primary: #2d6cdf;
-  --color-primary-soft: #e8eefb;
-  --color-offwhite: #f9f9f7;
-  --color-charcoal: #1a1a1a;
-  --color-warmgray: #6b6b6b;
+  --color-cream: #faf6ef;
+  --color-paper: #fffdf7;
+  --color-flour: #eee6d8;
+  --color-ink: #2b2118;
+  --color-mocha: #6e5e4e;
+  --color-honey: #b45309;
+  --color-honey-deep: #92400e;
+  --color-rust: #c05621;
+  --color-open: #047857;
+  --color-open-soft: #d8f2e5;
+  --color-close: #6b7280;
+  --color-close-soft: #ece7de;
 
   /* Typography */
   --font-sans:
     "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif;
+  --font-display:
+    "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
 
-  /* Type scale (per guidelines) */
-  --text-h1: 3rem; /* 48px */
-  --text-h1--line-height: 1.1;
-  --text-h1--font-weight: 700;
-  --text-h2: 2rem; /* 32px */
-  --text-h2--line-height: 1.2;
-  --text-h2--font-weight: 700;
-  --text-h3: 1.5rem; /* 24px */
+  /* Type scale */
+  --text-h1: clamp(2.5rem, 6vw, 4rem);
+  --text-h1--line-height: 1.04;
+  --text-h1--font-weight: 500;
+  --text-h2: clamp(1.75rem, 3.4vw, 2.5rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--font-weight: 600;
+  --text-h3: 1.375rem;
   --text-h3--line-height: 1.3;
-  --text-h3--font-weight: 700;
-
-  --text-body: 1rem; /* 16px */
-  --text-body--line-height: 1.6;
+  --text-h3--font-weight: 600;
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
   --text-body--font-weight: 400;
 
   /* 8pt spacing grid */
@@ -50,24 +63,21 @@
   --spacing-12: 3rem;
   --spacing-16: 4rem;
   --spacing-24: 6rem;
-
-  --container-page: 72rem;
+  --container-page: 76rem;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
-
   body {
-    @apply bg-offwhite text-charcoal font-sans antialiased;
+    @apply bg-cream font-sans text-ink antialiased;
   }
-
-  /* Headings: Inter Bold (700) */
+  /* Headings: Fraunces display serif, warm ink */
   h1,
   h2,
   h3 {
-    @apply font-sans font-bold text-charcoal;
+    @apply font-display font-semibold text-ink;
   }
   h1 {
     @apply text-h1;
@@ -78,25 +88,43 @@
   h3 {
     @apply text-h3;
   }
-
-  /* Body: Inter Regular (400) 16px / 1.6 */
+  /* Body */
   p {
-    @apply text-body text-charcoal;
+    @apply text-body text-ink;
   }
-
-  /* Captions / labels: Medium (500) 12px uppercase 0.08em */
+  /* Captions / labels: Medium 12px uppercase, 0.08em, mocha */
   .label {
-    @apply font-sans font-medium text-xs uppercase tracking-[0.08em] text-warmgray;
+    @apply font-sans text-xs font-medium uppercase tracking-[0.08em] text-mocha;
   }
-
-  /* Accessible focus ring using Primary Blue */
+  /* Accessible focus ring using Honey accent */
   :focus-visible {
-    @apply outline-primary;
+    @apply outline-honey;
     outline-offset: 2px;
   }
-
   ::selection {
-    background-color: var(--color-primary);
+    background-color: var(--color-honey);
     color: #fff;
+  }
+  /* Smooth reveal-on-scroll primitive (see <Reveal/>) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    html {
+      scroll-behavior: auto;
+    }
   }
 }

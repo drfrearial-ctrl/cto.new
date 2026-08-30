@@ -6,11 +6,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Your Brand — Clear, focused work, without the noise" },
+      { title: "My Moms Bakery — Fresh Czech Kolaches in Ely, IA" },
       {
         name: "description",
         content:
-          "We help teams move from idea to impact with simple, dependable tools and guidance — built to last.",
+          "My Moms Bakery is a family-run Czech bakery in Ely, Iowa. Scratch-made kolaches, cherry bars, quiche & occasion cakes. Open Friday & Saturday, 6–11 AM. Pre-order ahead so you don't miss out.",
       },
     ],
     links: [
@@ -26,7 +26,7 @@ export const Route = createRootRoute({
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap",
       },
     ],
   }),
